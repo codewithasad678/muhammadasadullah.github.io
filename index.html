@@ -37,6 +37,7 @@
 
   <!-- ── Icons & manifest ── -->
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="images/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
 
@@ -55,7 +56,8 @@
         "@id": "https://muhammadasadullah.com/#website",
         "url": "https://muhammadasadullah.com/",
         "name": "Muhammad Asadullah",
-        "inLanguage": "en"
+        "inLanguage": "en",
+        "image": "https://muhammadasadullah.com/images/logo-512.png"
       },
       {
         "@type": "ProfilePage",
@@ -180,11 +182,13 @@
       position: relative;
     }
     .nav-logo {
-      font-family: var(--font-head);
-      font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em;
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-family: var(--font-head); font-weight: 700; font-size: 1rem; letter-spacing: -0.01em;
       color: var(--highlight); text-decoration: none;
     }
-    .nav-logo span { color: var(--accent); }
+    .logo-mark { flex-shrink: 0; border-radius: 10px; transition: transform 0.25s, box-shadow 0.25s; }
+    .nav-logo:hover .logo-mark { transform: rotate(-6deg) scale(1.06); box-shadow: 0 6px 20px rgba(124,110,240,0.45); }
+    .logo-text small { display: block; font-family: var(--font); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 1px; }
     .nav-links { display: flex; gap: 2.2rem; list-style: none; }
     .nav-links a {
       font-size: 0.875rem; font-weight: 500; color: var(--muted);
@@ -637,6 +641,8 @@
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6ef0"/><stop offset="1" stop-color="#e06bdf"/></linearGradient>
+<symbol id="logo-symbol" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="url(#lg)"/><g fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 47V17l9 14 9-14v30"/><path d="M36 47l10-30 10 30"/></g><path d="M39.2 38h13.6" fill="none" stroke="#6be0c0" stroke-width="4.4" stroke-linecap="round"/></symbol></defs></svg>
   <a href="#main" class="skip-link">Skip to content</a>
 
   <div class="orb orb-1" aria-hidden="true"></div>
@@ -646,7 +652,7 @@
   <!-- ═════════ HEADER ═════════ -->
   <header class="site-header" id="site-header">
     <nav class="nav" aria-label="Main navigation">
-      <a href="#hero" class="nav-logo" aria-label="Muhammad Asadullah — home">MA<span>.</span></a>
+      <a href="#hero" class="nav-logo" aria-label="Muhammad Asadullah — home"><svg class="logo-mark" viewBox="0 0 64 64" width="38" height="38" aria-hidden="true"><use href="#logo-symbol"/></svg><span class="logo-text">Muhammad Asadullah<small>Full-Stack Developer</small></span></a>
       <ul class="nav-links" id="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
@@ -680,12 +686,10 @@
         <div class="hero-cta">
           <a href="#contact" class="btn btn-primary">Start a Project →</a>
           <a href="#projects" class="btn btn-secondary">View My Work</a>
-          <!-- Enable once you upload Muhammad-Asadullah-CV.pdf to the repo root:
-          <a href="Muhammad-Asadullah-CV.pdf" class="btn btn-secondary" download>
+          <a href="Muhammad-Asadullah-CV.pdf" class="btn btn-secondary" download="Muhammad-Asadullah-CV.pdf">
             <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg>
             Download CV
           </a>
-          -->
         </div>
         <div class="stats-row">
           <div class="stat"><div class="stat-num">5<span>+</span></div><div class="stat-label">Years Experience</div></div>
@@ -1186,7 +1190,7 @@
   <footer class="site-footer">
     <div class="footer-grid">
       <div class="footer-about">
-        <a href="#hero" class="nav-logo">MA<span>.</span></a>
+        <a href="#hero" class="nav-logo" aria-label="Muhammad Asadullah — home"><svg class="logo-mark" viewBox="0 0 64 64" width="38" height="38" aria-hidden="true"><use href="#logo-symbol"/></svg><span class="logo-text">Muhammad Asadullah<small>Full-Stack Developer</small></span></a>
         <p>Full-Stack Developer specialising in PHP Laravel, the MERN stack and AI-powered solutions. Building products for local and international clients.</p>
         <div class="socials">
           <a class="social" href="https://www.linkedin.com/in/muhammad-asadullah-21973b227/" target="_blank" rel="noopener noreferrer me" aria-label="LinkedIn">
