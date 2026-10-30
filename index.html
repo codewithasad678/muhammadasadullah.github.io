@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Muhammad Asadullah — Full-Stack Developer specialising in PHP Laravel and the MERN stack. Building web apps, SaaS platforms, REST APIs and AI-powered solutions." />
+  <meta name="theme-color" content="#0a0a0f" />
   <title>Muhammad Asadullah — Full-Stack Developer</title>
- 
+
   <style>
     @font-face {
-		font-family: 'CameraPlainVariable';
-		src: url('https://cdn.gpteng.co/mcp-widgets/v1/fonts/CameraPlainVariable.woff2') format('woff2');
-		font-weight: 100 900;
-		font-style: normal;
-		font-display: swap;
-	}
+      font-family: 'CameraPlainVariable';
+      src: url('https://cdn.gpteng.co/mcp-widgets/v1/fonts/CameraPlainVariable.woff2') format('woff2');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
     :root {
       --bg: #0a0a0f;
       --surface: #111118;
@@ -22,20 +24,28 @@
       --accent2: #e06bdf;
       --accent3: #6be0c0;
       --text: #e8e8f0;
-      --muted: #6b6b85;
+      --muted: #8a8aa3;
       --highlight: #f0f0ff;
+      --font: 'CameraPlainVariable', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
     body {
-      font-family: 'CameraPlainVariable';
+      font-family: var(--font);
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
     }
+
+    img { max-width: 100%; display: block; }
+
+    /* Form controls don't inherit font by default */
+    button, input, textarea { font-family: inherit; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
     /* ── NOISE TEXTURE OVERLAY ── */
     body::before {
@@ -67,15 +77,16 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.4rem 6%;
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       background: rgba(10,10,15,0.7);
       border-bottom: 1px solid rgba(255,255,255,0.04);
     }
     .nav-logo {
-      font-family: 'CameraPlainVariable';
       font-weight: 800;
       font-size: 1.2rem;
       letter-spacing: -0.02em;
       color: var(--highlight);
+      text-decoration: none;
     }
     .nav-logo span { color: var(--accent); }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
@@ -87,14 +98,14 @@
       letter-spacing: 0.03em;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--highlight); }
+    .nav-links a:hover, .nav-links a.active { color: var(--highlight); }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
     .nav-btn {
       padding: 0.5rem 1.25rem;
       background: transparent;
       border: 1px solid var(--accent);
       color: var(--accent);
       border-radius: 6px;
-    font-family: 'CameraPlainVariable';
       font-size: 0.85rem;
       font-weight: 500;
       cursor: pointer;
@@ -102,6 +113,16 @@
       text-decoration: none;
     }
     .nav-btn:hover { background: var(--accent); color: #fff; }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      width: 38px; height: 38px;
+      cursor: pointer;
+      align-items: center; justify-content: center;
+    }
 
     /* ── SECTIONS ── */
     section { position: relative; z-index: 1; }
@@ -114,6 +135,7 @@
     }
     .hero-inner {
       max-width: 1200px; width: 100%;
+      margin: 0 auto;
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 4rem; align-items: center;
     }
@@ -140,7 +162,6 @@
       50% { opacity: 0.5; transform: scale(0.8); }
     }
     .hero-name {
-      font-family: 'CameraPlainVariable';
       font-size: clamp(2.8rem, 5vw, 4.5rem);
       font-weight: 800;
       line-height: 1.05;
@@ -148,7 +169,7 @@
       color: var(--highlight);
       margin-bottom: 0.5rem;
     }
-    .hero-name .gradient-text {
+    .gradient-text {
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -168,16 +189,13 @@
       max-width: 480px;
       margin-bottom: 2.5rem;
     }
-    .hero-cta {
-      display: flex; gap: 1rem; flex-wrap: wrap;
-    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
     .btn-primary {
       padding: 0.8rem 2rem;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       color: #fff;
       border: none;
       border-radius: 8px;
-      font-family: 'CameraPlainVariable';
       font-size: 0.95rem;
       font-weight: 500;
       cursor: pointer;
@@ -192,7 +210,6 @@
       color: var(--text);
       border: 1px solid var(--border);
       border-radius: 8px;
-      font-family: 'CameraPlainVariable';
       font-size: 0.95rem;
       font-weight: 500;
       cursor: pointer;
@@ -207,9 +224,11 @@
       display: flex; justify-content: center; align-items: center;
       position: relative;
     }
+    .avatar-wrap { position: relative; }
     .avatar-ring {
       position: relative;
       width: 320px; height: 320px;
+      max-width: 75vw; max-height: 75vw;
     }
     .avatar-ring::before {
       content: '';
@@ -222,10 +241,9 @@
     .avatar-ring::after {
       content: '';
       position: absolute;
-      inset: 0;
+      inset: 3px;
       border-radius: 50%;
       background: var(--bg);
-      margin: 3px;
     }
     @keyframes spin {
       from { transform: rotate(0deg); }
@@ -240,15 +258,16 @@
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
     }
+    .avatar-img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 2;
+    }
     .avatar-initials {
-      font-family: 'CameraPlainVariable';
       font-size: 4rem;
       font-weight: 800;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      z-index: 2;
     }
     .float-badge {
       position: absolute;
@@ -259,6 +278,7 @@
       font-size: 0.78rem;
       font-weight: 500;
       z-index: 3;
+      white-space: nowrap;
       backdrop-filter: blur(10px);
     }
     .float-badge.top-right {
@@ -277,13 +297,8 @@
     }
 
     /* Stats row */
-    .stats-row {
-      display: flex; gap: 2.5rem;
-      margin-top: 2.5rem;
-    }
-    .stat { }
+    .stats-row { display: flex; gap: 2.5rem; margin-top: 2.5rem; flex-wrap: wrap; }
     .stat-num {
-      font-family: 'CameraPlainVariable';
       font-size: 1.8rem;
       font-weight: 800;
       color: var(--highlight);
@@ -307,7 +322,6 @@
       margin-bottom: 0.75rem;
     }
     .section-title {
-      font-family: 'CameraPlainVariable';
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 800;
       color: var(--highlight);
@@ -328,6 +342,7 @@
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 4rem; align-items: start;
     }
+    .about-text { margin-top: 1.5rem; }
     .about-text p {
       font-size: 1rem;
       line-height: 1.85;
@@ -335,13 +350,8 @@
       margin-bottom: 1.2rem;
     }
     .about-text p strong { color: var(--highlight); font-weight: 500; }
-    .about-info {
-      display: flex; flex-direction: column; gap: 1rem;
-      margin-top: 2rem;
-    }
-    .info-row {
-      display: flex; gap: 1rem; align-items: center;
-    }
+    .about-info { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+    .info-row { display: flex; gap: 1rem; align-items: center; }
     .info-icon {
       width: 36px; height: 36px;
       background: rgba(124,110,240,0.1);
@@ -352,8 +362,33 @@
     .info-text { font-size: 0.9rem; color: var(--muted); }
     .info-text strong { color: var(--text); display: block; font-weight: 500; }
 
+    /* Proficiency bars */
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+    .panel-title {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem;
+    }
+    .bars { display: flex; flex-direction: column; gap: 1rem; }
+    .bar-head { display: flex; justify-content: space-between; margin-bottom: 0.4rem; }
+    .bar-name { font-size: 0.85rem; font-weight: 500; }
+    .bar-pct { font-size: 0.8rem; color: var(--muted); }
+    .bar-track { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .bar-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+    .visible .bar-fill { width: var(--w); }
+
     /* ── SKILLS ── */
-    #skills .skills-grid {
+    .skills-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 1rem;
     }
@@ -363,20 +398,18 @@
       border-radius: 10px;
       padding: 1rem;
       text-align: center;
-      transition: border-color 0.2s, transform 0.2s;
+      transition: border-color 0.2s, transform 0.2s, opacity 0.6s ease;
       cursor: default;
     }
     .skill-chip:hover { border-color: var(--accent); transform: translateY(-3px); }
     .skill-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
     .skill-name { font-size: 0.82rem; font-weight: 500; color: var(--text); }
-    .skill-level {
-      font-size: 0.7rem; color: var(--muted); margin-top: 0.25rem;
-    }
+    .skill-level { font-size: 0.7rem; color: var(--muted); margin-top: 0.25rem; }
 
     /* ── PROJECTS ── */
     #projects { background: var(--surface); }
     .projects-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
       gap: 1.5rem;
     }
     .project-card {
@@ -384,7 +417,7 @@
       border: 1px solid var(--border);
       border-radius: 14px;
       overflow: hidden;
-      transition: border-color 0.25s, transform 0.25s;
+      transition: border-color 0.25s, transform 0.25s, opacity 0.6s ease;
       position: relative;
     }
     .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
@@ -417,8 +450,8 @@
     .tag-js { background: rgba(240,220,100,0.12); color: #f0dc64; }
     .tag-ts { background: rgba(100,149,240,0.12); color: #6495f0; }
     .tag-next { background: rgba(200,200,200,0.1); color: #c8c8c8; }
+    .tag-php { background: rgba(255,45,32,0.12); color: #ff6b5e; }
     .project-title {
-      font-family: 'CameraPlainVariable';
       font-size: 1.1rem;
       font-weight: 700;
       color: var(--highlight);
@@ -451,11 +484,10 @@
       position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px;
       background: linear-gradient(to bottom, var(--accent), transparent);
     }
-    .timeline-item {
-      position: relative; margin-bottom: 2.5rem;
-    }
+    .timeline-item { position: relative; margin-bottom: 2.5rem; }
+    .timeline-item:last-child { margin-bottom: 0; }
     .timeline-dot {
-      position: absolute; left: -2.35rem; top: 6px;
+      position: absolute; left: calc(-2rem - 6px); top: 6px;
       width: 12px; height: 12px;
       border-radius: 50%;
       background: var(--accent);
@@ -470,22 +502,13 @@
       margin-bottom: 0.35rem;
     }
     .timeline-role {
-      font-family: 'CameraPlainVariable';
       font-size: 1.05rem;
       font-weight: 700;
       color: var(--highlight);
       margin-bottom: 0.2rem;
     }
-    .timeline-company {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 0.7rem;
-    }
-    .timeline-desc {
-      font-size: 0.88rem;
-      line-height: 1.75;
-      color: rgba(232,232,240,0.6);
-    }
+    .timeline-company { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.7rem; }
+    .timeline-desc { font-size: 0.88rem; line-height: 1.75; color: rgba(232,232,240,0.6); }
 
     /* ── CONTACT ── */
     #contact { background: var(--surface); }
@@ -516,14 +539,18 @@
       border-radius: 8px;
       padding: 0.8rem 1rem;
       color: var(--text);
-      font-family: 'CameraPlainVariable';
       font-size: 0.9rem;
       transition: border-color 0.2s;
       outline: none;
     }
+    .form-input::placeholder, .form-textarea::placeholder { color: #55556b; }
     .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
     .form-textarea { resize: vertical; min-height: 120px; }
+    .form-submit { width: 100%; text-align: center; }
+    .form-status { font-size: 0.85rem; margin-top: 0.9rem; min-height: 1.2em; color: var(--accent3); }
+    .form-status.error { color: #ff7a7a; }
     .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+    .contact-intro { font-size: 0.95rem; line-height: 1.8; color: var(--muted); margin-bottom: 0.5rem; }
     .contact-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -532,8 +559,11 @@
       display: flex; align-items: center; gap: 1rem;
       transition: border-color 0.2s;
       text-decoration: none;
+      color: inherit;
+      min-width: 0;
     }
     .contact-card:hover { border-color: var(--accent); }
+    .contact-card > div:last-child { min-width: 0; }
     .contact-card-icon {
       width: 40px; height: 40px;
       border-radius: 10px;
@@ -545,7 +575,17 @@
     .icon-linkedin { background: rgba(100,149,240,0.15); }
     .icon-github { background: rgba(200,200,200,0.1); }
     .contact-card-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
-    .contact-card-value { font-size: 0.9rem; font-weight: 500; color: var(--text); margin-top: 0.1rem; }
+    .contact-card-value {
+      font-size: 0.9rem; font-weight: 500; color: var(--text); margin-top: 0.1rem;
+      overflow-wrap: anywhere;
+    }
+    .response-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem 1.5rem;
+    }
+    .response-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+    .response-value { font-size: 1.4rem; font-weight: 700; color: var(--accent3); }
+    .response-hours { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
 
     /* ── FOOTER ── */
     footer {
@@ -558,47 +598,79 @@
     }
     footer span { color: var(--accent); }
 
-    /* ── SCROLL ANIMATION ── */
-    .fade-up {
+    /* ── SCROLL ANIMATION ── (only hides content when JS is running) */
+    .js .fade-up {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .js .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .js .skill-chip.fade-up.visible:hover,
+    .js .project-card.fade-up.visible:hover { transform: translateY(-4px); }
+    .delay-1 { transition-delay: 0.15s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .js .fade-up { opacity: 1; transform: none; }
     }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-toggle { display: inline-flex; }
+      .nav-links {
+        display: none;
+        position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; gap: 0;
+        background: rgba(10,10,15,0.97);
+        border-bottom: 1px solid var(--border);
+        padding: 0.5rem 6% 1rem;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { display: block; padding: 0.8rem 0; font-size: 1rem; }
+    }
     @media (max-width: 768px) {
-      .hero-inner, .about-grid, .contact-wrapper { grid-template-columns: 1fr; }
-      .hero-visual { margin-top: 2rem; }
-      .nav-links { display: none; }
-      .projects-grid { grid-template-columns: 1fr; }
+      nav { padding: 1rem 16px; }
+      #hero { padding: 6.5rem 16px 3rem; }
+      .section-wrap { padding: 4.5rem 16px; }
+      .hero-inner, .about-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-visual { margin-top: 1rem; order: -1; }
+      .avatar-ring { width: 220px; height: 220px; }
+      .avatar-initials { font-size: 3rem; }
+      .float-badge.top-right { right: -10px; }
+      .float-badge.bottom-left { left: -10px; }
       .stats-row { gap: 1.5rem; }
+      .contact-form, .panel { padding: 1.5rem; }
     }
   </style>
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
   <!-- Background -->
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+  <div class="orb orb-3" aria-hidden="true"></div>
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo">MA<span>.</span></div>
-    <ul class="nav-links">
+    <a href="#hero" class="nav-logo">MA<span>.</span></a>
+    <ul class="nav-links" id="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="#contact" class="nav-btn">Hire Me</a>
+    <div class="nav-right">
+      <a href="#contact" class="nav-btn">Hire Me</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
   </nav>
 
+  <main>
   <!-- HERO -->
   <section id="hero">
     <div class="hero-inner">
@@ -612,18 +684,18 @@
         </h1>
         <p class="hero-role">Full-Stack Developer · PHP Laravel, MERN Stack</p>
         <p class="hero-desc">
-          I craft scalable, high-performance web applications with a focus on clean architecture and delightful user experiences. Passionate about turning complex ideas into elegant digital products.
+          I craft scalable, high-performance web applications, SaaS platforms and REST APIs with a focus on clean architecture and delightful user experiences. Passionate about AI, automation and turning complex ideas into elegant digital products.
         </p>
         <div class="hero-cta">
           <a href="#projects" class="btn-primary">View My Work</a>
           <a href="#contact" class="btn-secondary">
-            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
             Get in Touch
           </a>
         </div>
         <div class="stats-row">
           <div class="stat">
-            <div class="stat-num">4<span>+</span></div>
+            <div class="stat-num">5<span>+</span></div>
             <div class="stat-label">Years Experience</div>
           </div>
           <div class="stat">
@@ -638,13 +710,17 @@
       </div>
 
       <div class="hero-visual">
-        <div class="avatar-ring">
-          <div class="avatar-inner">
-            <span class="avatar-initials"><img src="images/profle.png" alt="profile image"  style="width:100%; height:100%; object-fit:cover;"> </span>
+        <div class="avatar-wrap">
+          <div class="avatar-ring">
+            <div class="avatar-inner">
+              <!-- Initials show if the photo is missing or fails to load -->
+              <span class="avatar-initials gradient-text" aria-hidden="true">MA</span>
+              <img class="avatar-img" src="images/profile.png" alt="Muhammad Asadullah" onerror="this.remove()" />
+            </div>
           </div>
+          <div class="float-badge top-right">⚡ MERN Stack</div>
+          <div class="float-badge bottom-left">🚀 PHP Laravel</div>
         </div>
-        <div class="float-badge top-right">⚡ MERN Stack</div>
-        <div class="float-badge bottom-left">🚀 PHP Laravel</div>
       </div>
     </div>
   </section>
@@ -656,28 +732,28 @@
         <div class="fade-up">
           <p class="section-tag">About Me</p>
           <h2 class="section-title">Passionate about building things that matter</h2>
-          <div class="about-text" style="margin-top:1.5rem">
-            <p>Hi! I'm <strong>Muhammad Asadullah</strong>, a Full-Stack Developer specialising in the MERN stack. I studied at <strong>NED University of Engineering and Technology</strong>, one of Pakistan's premier engineering institutions.</p>
-            <p>I love crafting both the visible and invisible parts of web applications — from pixel-perfect UIs in React to robust REST APIs in Node.js, and seamless mobile experiences in React Native.</p>
+          <div class="about-text">
+            <p>Hi! I'm <strong>Muhammad Asadullah</strong>, a Full-Stack Developer specialising in <strong>PHP Laravel</strong> and the <strong>MERN stack</strong>. I studied at <strong>NED University of Engineering and Technology</strong>, one of Pakistan's premier engineering institutions.</p>
+            <p>I love crafting both the visible and invisible parts of web applications — from pixel-perfect UIs in React to robust REST APIs in Laravel and Node.js, database design, and third-party integrations.</p>
             <p>Currently working at <strong>Appxone</strong>, where I build scalable products and collaborate with cross-functional teams to deliver real-world impact.</p>
           </div>
           <div class="about-info">
             <div class="info-row">
-              <div class="info-icon">🎓</div>
+              <div class="info-icon" aria-hidden="true">🎓</div>
               <div class="info-text">
                 <strong>Education</strong>
                 NED University of Engineering and Technology
               </div>
             </div>
             <div class="info-row">
-              <div class="info-icon">🏢</div>
+              <div class="info-icon" aria-hidden="true">🏢</div>
               <div class="info-text">
                 <strong>Current Role</strong>
                 Software Developer at Appxone
               </div>
             </div>
             <div class="info-row">
-              <div class="info-icon">📍</div>
+              <div class="info-icon" aria-hidden="true">📍</div>
               <div class="info-text">
                 <strong>Location</strong>
                 Karachi, Pakistan
@@ -685,54 +761,29 @@
             </div>
           </div>
         </div>
-        <div class="fade-up" style="transition-delay:0.15s">
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem">
-            <p style="font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem">Tech I Work With</p>
-            <div style="display:flex;flex-direction:column;gap:1rem">
+        <div class="fade-up delay-1">
+          <div class="panel">
+            <p class="panel-title">Tech I Work With</p>
+            <div class="bars">
               <div>
-                <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem">
-                  <span style="font-size:0.85rem;font-weight:500">React / Next.js</span>
-                  <span style="font-size:0.8rem;color:var(--muted)">90%</span>
-                </div>
-                <div style="height:4px;background:var(--border);border-radius:2px">
-                  <div style="width:90%;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px"></div>
-                </div>
+                <div class="bar-head"><span class="bar-name">PHP / Laravel</span><span class="bar-pct">90%</span></div>
+                <div class="bar-track"><div class="bar-fill" style="--w:90%"></div></div>
               </div>
               <div>
-                <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem">
-                  <span style="font-size:0.85rem;font-weight:500">Node.js / Express</span>
-                  <span style="font-size:0.8rem;color:var(--muted)">85%</span>
-                </div>
-                <div style="height:4px;background:var(--border);border-radius:2px">
-                  <div style="width:85%;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px"></div>
-                </div>
+                <div class="bar-head"><span class="bar-name">React / Next.js</span><span class="bar-pct">88%</span></div>
+                <div class="bar-track"><div class="bar-fill" style="--w:88%"></div></div>
               </div>
               <div>
-                <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem">
-                  <span style="font-size:0.85rem;font-weight:500">MongoDB</span>
-                  <span style="font-size:0.8rem;color:var(--muted)">82%</span>
-                </div>
-                <div style="height:4px;background:var(--border);border-radius:2px">
-                  <div style="width:82%;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px"></div>
-                </div>
+                <div class="bar-head"><span class="bar-name">Node.js / Express</span><span class="bar-pct">85%</span></div>
+                <div class="bar-track"><div class="bar-fill" style="--w:85%"></div></div>
               </div>
               <div>
-                <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem">
-                  <span style="font-size:0.85rem;font-weight:500">React Native</span>
-                  <span style="font-size:0.8rem;color:var(--muted)">78%</span>
-                </div>
-                <div style="height:4px;background:var(--border);border-radius:2px">
-                  <div style="width:78%;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px"></div>
-                </div>
+                <div class="bar-head"><span class="bar-name">MySQL / MongoDB</span><span class="bar-pct">85%</span></div>
+                <div class="bar-track"><div class="bar-fill" style="--w:85%"></div></div>
               </div>
               <div>
-                <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem">
-                  <span style="font-size:0.85rem;font-weight:500">TypeScript</span>
-                  <span style="font-size:0.8rem;color:var(--muted)">80%</span>
-                </div>
-                <div style="height:4px;background:var(--border);border-radius:2px">
-                  <div style="width:80%;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px"></div>
-                </div>
+                <div class="bar-head"><span class="bar-name">TypeScript</span><span class="bar-pct">80%</span></div>
+                <div class="bar-track"><div class="bar-fill" style="--w:80%"></div></div>
               </div>
             </div>
           </div>
@@ -746,26 +797,28 @@
     <div class="section-wrap">
       <div class="section-header fade-up">
         <p class="section-tag">Tech Stack</p>
-        <h2 class="section-title">Skills & Technologies</h2>
+        <h2 class="section-title">Skills &amp; Technologies</h2>
         <p class="section-subtitle">A curated toolkit built over years of shipping production applications.</p>
       </div>
       <div class="skills-grid">
+        <div class="skill-chip fade-up"><div class="skill-icon">🐘</div><div class="skill-name">PHP</div><div class="skill-level">Advanced</div></div>
+        <div class="skill-chip fade-up"><div class="skill-icon">🔺</div><div class="skill-name">Laravel</div><div class="skill-level">Advanced</div></div>
+        <div class="skill-chip fade-up"><div class="skill-icon">🐬</div><div class="skill-name">MySQL</div><div class="skill-level">Advanced</div></div>
         <div class="skill-chip fade-up"><div class="skill-icon">⚛️</div><div class="skill-name">React.js</div><div class="skill-level">Advanced</div></div>
         <div class="skill-chip fade-up"><div class="skill-icon">🟩</div><div class="skill-name">Node.js</div><div class="skill-level">Advanced</div></div>
         <div class="skill-chip fade-up"><div class="skill-icon">🍃</div><div class="skill-name">MongoDB</div><div class="skill-level">Advanced</div></div>
-        <div class="skill-chip fade-up"><div class="skill-icon">📱</div><div class="skill-name">React Native</div><div class="skill-level">Advanced</div></div>
+        <div class="skill-chip fade-up"><div class="skill-icon">🚂</div><div class="skill-name">Express.js</div><div class="skill-level">Advanced</div></div>
+        <div class="skill-chip fade-up"><div class="skill-icon">🟡</div><div class="skill-name">JavaScript</div><div class="skill-level">Advanced</div></div>
         <div class="skill-chip fade-up"><div class="skill-icon">▲</div><div class="skill-name">Next.js</div><div class="skill-level">Proficient</div></div>
         <div class="skill-chip fade-up"><div class="skill-icon">🔷</div><div class="skill-name">TypeScript</div><div class="skill-level">Proficient</div></div>
-        <div class="skill-chip fade-up"><div class="skill-icon">🟡</div><div class="skill-name">JavaScript</div><div class="skill-level">Advanced</div></div>
-        <div class="skill-chip fade-up"><div class="skill-icon">🚂</div><div class="skill-name">Express.js</div><div class="skill-level">Advanced</div></div>
-        <div class="skill-chip fade-up"><div class="skill-icon">🐘</div><div class="skill-name">PostgreSQL</div><div class="skill-level">Proficient</div></div>
+        <div class="skill-chip fade-up"><div class="skill-icon">📱</div><div class="skill-name">React Native</div><div class="skill-level">Proficient</div></div>
+        <div class="skill-chip fade-up"><div class="skill-icon">🗄️</div><div class="skill-name">PostgreSQL</div><div class="skill-level">Proficient</div></div>
+        <div class="skill-chip fade-up"><div class="skill-icon">🎨</div><div class="skill-name">Tailwind CSS</div><div class="skill-level">Advanced</div></div>
+        <div class="skill-chip fade-up"><div class="skill-icon">🔌</div><div class="skill-name">REST APIs</div><div class="skill-level">Advanced</div></div>
+        <div class="skill-chip fade-up"><div class="skill-icon">🤖</div><div class="skill-name">AI Integrations</div><div class="skill-level">Proficient</div></div>
         <div class="skill-chip fade-up"><div class="skill-icon">🐳</div><div class="skill-name">Docker</div><div class="skill-level">Familiar</div></div>
         <div class="skill-chip fade-up"><div class="skill-icon">☁️</div><div class="skill-name">AWS</div><div class="skill-level">Familiar</div></div>
-        <div class="skill-chip fade-up"><div class="skill-icon">🎨</div><div class="skill-name">Tailwind CSS</div><div class="skill-level">Advanced</div></div>
-        <div class="skill-chip fade-up"><div class="skill-icon">🔴</div><div class="skill-name">Redis</div><div class="skill-level">Familiar</div></div>
-        <div class="skill-chip fade-up"><div class="skill-icon">🔗</div><div class="skill-name">GraphQL</div><div class="skill-level">Proficient</div></div>
         <div class="skill-chip fade-up"><div class="skill-icon">📦</div><div class="skill-name">Git / GitHub</div><div class="skill-level">Advanced</div></div>
-        <div class="skill-chip fade-up"><div class="skill-icon">🔌</div><div class="skill-name">REST APIs</div><div class="skill-level">Advanced</div></div>
       </div>
     </div>
   </section>
@@ -781,9 +834,7 @@
       <div class="projects-grid">
 
         <div class="project-card fade-up">
-          <div class="project-img project-gradient-1">
-            <div class="project-img-icon">🛒</div>
-          </div>
+          <div class="project-img project-gradient-1"><div class="project-img-icon" aria-hidden="true">🛒</div></div>
           <div class="project-body">
             <div class="project-tags">
               <span class="tag tag-react">React</span>
@@ -794,15 +845,13 @@
             <p class="project-desc">Full-featured online store with real-time inventory, Stripe payments, admin dashboard, and JWT authentication.</p>
             <div class="project-links">
               <a href="#" class="project-link">Live Demo ↗</a>
-              <a href="#" class="project-link project-link-ghost">GitHub →</a>
+              <a href="https://github.com/codewithasad678" target="_blank" rel="noopener noreferrer" class="project-link project-link-ghost">GitHub →</a>
             </div>
           </div>
         </div>
 
         <div class="project-card fade-up">
-          <div class="project-img project-gradient-2">
-            <div class="project-img-icon">💬</div>
-          </div>
+          <div class="project-img project-gradient-2"><div class="project-img-icon" aria-hidden="true">💬</div></div>
           <div class="project-body">
             <div class="project-tags">
               <span class="tag tag-react">React</span>
@@ -813,34 +862,30 @@
             <p class="project-desc">Messaging platform with WebSocket real-time communication, group chats, read receipts, and media sharing.</p>
             <div class="project-links">
               <a href="#" class="project-link">Live Demo ↗</a>
-              <a href="#" class="project-link project-link-ghost">GitHub →</a>
+              <a href="https://github.com/codewithasad678" target="_blank" rel="noopener noreferrer" class="project-link project-link-ghost">GitHub →</a>
             </div>
           </div>
         </div>
 
         <div class="project-card fade-up">
-          <div class="project-img project-gradient-3">
-            <div class="project-img-icon">📋</div>
-          </div>
+          <div class="project-img project-gradient-3"><div class="project-img-icon" aria-hidden="true">🧾</div></div>
           <div class="project-body">
             <div class="project-tags">
-              <span class="tag tag-react">React Native</span>
-              <span class="tag tag-node">Node.js</span>
-              <span class="tag tag-js">Firebase</span>
+              <span class="tag tag-php">Laravel</span>
+              <span class="tag tag-js">MySQL</span>
+              <span class="tag tag-node">REST API</span>
             </div>
-            <h3 class="project-title">Task Manager Mobile App</h3>
-            <p class="project-desc">Cross-platform productivity app with offline support, push notifications, team collaboration, and cloud sync.</p>
+            <h3 class="project-title">SaaS Invoicing &amp; Billing</h3>
+            <p class="project-desc">Multi-tenant Laravel SaaS with subscription billing, invoice PDFs, role-based access, and third-party payment integrations.</p>
             <div class="project-links">
-              <a href="#" class="project-link">App Store ↗</a>
-              <a href="#" class="project-link project-link-ghost">GitHub →</a>
+              <a href="#" class="project-link">Live Demo ↗</a>
+              <a href="https://github.com/codewithasad678" target="_blank" rel="noopener noreferrer" class="project-link project-link-ghost">GitHub →</a>
             </div>
           </div>
         </div>
 
         <div class="project-card fade-up">
-          <div class="project-img project-gradient-4">
-            <div class="project-img-icon">📊</div>
-          </div>
+          <div class="project-img project-gradient-4"><div class="project-img-icon" aria-hidden="true">📊</div></div>
           <div class="project-body">
             <div class="project-tags">
               <span class="tag tag-next">Next.js</span>
@@ -851,34 +896,30 @@
             <p class="project-desc">Data visualisation platform with interactive charts, custom date ranges, CSV export, and role-based access control.</p>
             <div class="project-links">
               <a href="#" class="project-link">Live Demo ↗</a>
-              <a href="#" class="project-link project-link-ghost">GitHub →</a>
+              <a href="https://github.com/codewithasad678" target="_blank" rel="noopener noreferrer" class="project-link project-link-ghost">GitHub →</a>
             </div>
           </div>
         </div>
 
         <div class="project-card fade-up">
-          <div class="project-img project-gradient-5">
-            <div class="project-img-icon">🏥</div>
-          </div>
+          <div class="project-img project-gradient-5"><div class="project-img-icon" aria-hidden="true">🏥</div></div>
           <div class="project-body">
             <div class="project-tags">
+              <span class="tag tag-php">Laravel</span>
               <span class="tag tag-react">React</span>
-              <span class="tag tag-node">Node.js</span>
-              <span class="tag tag-ts">TypeScript</span>
+              <span class="tag tag-js">MySQL</span>
             </div>
             <h3 class="project-title">Healthcare Booking System</h3>
             <p class="project-desc">Doctor appointment platform with calendar integration, video consultations, prescription management, and email reminders.</p>
             <div class="project-links">
               <a href="#" class="project-link">Live Demo ↗</a>
-              <a href="#" class="project-link project-link-ghost">GitHub →</a>
+              <a href="https://github.com/codewithasad678" target="_blank" rel="noopener noreferrer" class="project-link project-link-ghost">GitHub →</a>
             </div>
           </div>
         </div>
 
         <div class="project-card fade-up">
-          <div class="project-img project-gradient-6">
-            <div class="project-img-icon">🤖</div>
-          </div>
+          <div class="project-img project-gradient-6"><div class="project-img-icon" aria-hidden="true">🤖</div></div>
           <div class="project-body">
             <div class="project-tags">
               <span class="tag tag-next">Next.js</span>
@@ -889,7 +930,7 @@
             <p class="project-desc">GPT-powered writing assistant with custom templates, tone controls, history tracking, and team sharing features.</p>
             <div class="project-links">
               <a href="#" class="project-link">Live Demo ↗</a>
-              <a href="#" class="project-link project-link-ghost">GitHub →</a>
+              <a href="https://github.com/codewithasad678" target="_blank" rel="noopener noreferrer" class="project-link project-link-ghost">GitHub →</a>
             </div>
           </div>
         </div>
@@ -903,7 +944,7 @@
     <div class="section-wrap">
       <div class="section-header fade-up">
         <p class="section-tag">Journey</p>
-        <h2 class="section-title">Experience & Education</h2>
+        <h2 class="section-title">Experience &amp; Education</h2>
         <p class="section-subtitle">A timeline of where I've worked and learned.</p>
       </div>
       <div class="timeline fade-up">
@@ -912,21 +953,21 @@
           <div class="timeline-date">2023 — Present</div>
           <div class="timeline-role">Software Developer</div>
           <div class="timeline-company">Appxone · Full-time</div>
-          <div class="timeline-desc">Building and maintaining full-stack web and mobile applications. Working across the MERN stack to deliver scalable solutions for clients. Leading frontend architecture decisions and mentoring junior developers.</div>
+          <div class="timeline-desc">Building and maintaining full-stack web and mobile applications with PHP Laravel and the MERN stack. Designing REST APIs, databases and third-party integrations for clients. Leading frontend architecture decisions and mentoring junior developers.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="timeline-date">2022 — 2023</div>
-          <div class="timeline-role">Junior Web Developer</div>
+          <div class="timeline-date">2021 — 2023</div>
+          <div class="timeline-role">Web Developer</div>
           <div class="timeline-company">Freelance · Contract</div>
-          <div class="timeline-desc">Delivered 10+ client projects ranging from landing pages to full e-commerce platforms. Developed proficiency in React, Node.js, and MongoDB through real-world project delivery.</div>
+          <div class="timeline-desc">Delivered 10+ client projects ranging from landing pages to full e-commerce platforms, using Laravel, React, Node.js, MySQL and MongoDB.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-date">2019 — 2023</div>
           <div class="timeline-role">Bachelor of Engineering</div>
           <div class="timeline-company">NED University of Engineering and Technology</div>
-          <div class="timeline-desc">Studied Computer & Information Systems Engineering. Developed strong fundamentals in algorithms, data structures, software engineering, and systems design.</div>
+          <div class="timeline-desc">Studied Computer &amp; Information Systems Engineering. Developed strong fundamentals in algorithms, data structures, software engineering, and systems design.</div>
         </div>
       </div>
     </div>
@@ -941,88 +982,135 @@
         <p class="section-subtitle">Have a project in mind or want to collaborate? I'd love to hear from you.</p>
       </div>
       <div class="contact-wrapper">
-        <div class="contact-form fade-up">
+        <form class="contact-form fade-up" id="contact-form" novalidate>
           <div class="form-group">
-            <label class="form-label">Name</label>
-            <input class="form-input" type="text" placeholder="Your full name" />
+            <label class="form-label" for="cf-name">Name</label>
+            <input class="form-input" id="cf-name" name="name" type="text" placeholder="Your full name" autocomplete="name" required />
           </div>
           <div class="form-group">
-            <label class="form-label">Email</label>
-            <input class="form-input" type="email" placeholder="your@email.com" />
+            <label class="form-label" for="cf-email">Email</label>
+            <input class="form-input" id="cf-email" name="email" type="email" placeholder="your@email.com" autocomplete="email" required />
           </div>
           <div class="form-group">
-            <label class="form-label">Subject</label>
-            <input class="form-input" type="text" placeholder="Project inquiry" />
+            <label class="form-label" for="cf-subject">Subject</label>
+            <input class="form-input" id="cf-subject" name="subject" type="text" placeholder="Project inquiry" />
           </div>
           <div class="form-group">
-            <label class="form-label">Message</label>
-            <textarea class="form-textarea" placeholder="Tell me about your project..."></textarea>
+            <label class="form-label" for="cf-message">Message</label>
+            <textarea class="form-textarea" id="cf-message" name="message" placeholder="Tell me about your project..." required></textarea>
           </div>
-          <button class="btn-primary" style="width:100%;text-align:center" onclick="alert('Message sent! Muhammad will get back to you soon.')">Send Message →</button>
-        </div>
-        <div class="contact-info fade-up" style="transition-delay:0.15s">
-          <p style="font-size:0.95rem;line-height:1.8;color:var(--muted);margin-bottom:0.5rem">Whether you have a project idea, a job opportunity, or just want to say hello — my inbox is always open.</p>
-          <a href="mailto:asadullahsudo@gmail.com" class="contact-card" style="color:inherit">
-            <div class="contact-card-icon icon-email">📧</div>
+          <button type="submit" class="btn-primary form-submit">Send Message →</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+        <div class="contact-info fade-up delay-1">
+          <p class="contact-intro">Whether you have a project idea, a job opportunity, or just want to say hello — my inbox is always open.</p>
+          <a href="mailto:asadullahsudo@gmail.com" class="contact-card">
+            <div class="contact-card-icon icon-email" aria-hidden="true">📧</div>
             <div>
               <div class="contact-card-label">Email</div>
               <div class="contact-card-value">asadullahsudo@gmail.com</div>
             </div>
           </a>
-          <a href="https://www.linkedin.com/in/muhammad-asadullah-21973b227/" target="_blank" class="contact-card" style="color:inherit">
-            <div class="contact-card-icon icon-linkedin">💼</div>
+          <a href="https://www.linkedin.com/in/muhammad-asadullah-21973b227/" target="_blank" rel="noopener noreferrer" class="contact-card">
+            <div class="contact-card-icon icon-linkedin" aria-hidden="true">💼</div>
             <div>
               <div class="contact-card-label">LinkedIn</div>
-              <div class="contact-card-value">https://www.linkedin.com/in/muhammad-asadullah-21973b227/</div>
+              <div class="contact-card-value">in/muhammad-asadullah-21973b227</div>
             </div>
           </a>
-          <a href="https://github.com/codewithasad678" target="_blank" class="contact-card" style="color:inherit">
-            <div class="contact-card-icon icon-github">🐙</div>
+          <a href="https://github.com/codewithasad678" target="_blank" rel="noopener noreferrer" class="contact-card">
+            <div class="contact-card-icon icon-github" aria-hidden="true">🐙</div>
             <div>
               <div class="contact-card-label">GitHub</div>
-              <div class="contact-card-value">https://github.com/codewithasad678</div>
+              <div class="contact-card-value">github.com/codewithasad678</div>
             </div>
           </a>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem">
-            <div style="font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Response time</div>
-            <div style="font-size:1.4rem;font-family: 'CameraPlainVariable';font-weight:700;color:var(--accent3)">Within 24 hours</div>
-            <div style="font-size:0.8rem;color:var(--muted);margin-top:0.25rem">Mon – Sat, 9AM – 6PM PKT</div>
+          <div class="response-card">
+            <div class="response-label">Response time</div>
+            <div class="response-value">Within 24 hours</div>
+            <div class="response-hours">Mon – Sat, 9AM – 6PM PKT</div>
           </div>
         </div>
       </div>
     </div>
   </section>
+  </main>
 
   <!-- FOOTER -->
   <footer>
-    <p>Designed & built by <span>Muhammad Asadullah</span> · © 2026 · All rights reserved</p>
+    <p>Designed &amp; built by <span>Muhammad Asadullah</span> · © <span id="year">2026</span> · All rights reserved</p>
   </footer>
 
   <script>
-    // Intersection Observer for fade-up animations
+    // Fade-up animations (unobserve once shown)
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    // Smooth active nav highlight
+    // Mobile menu
+    const navToggle = document.getElementById('nav-toggle');
+    const navList = document.getElementById('nav-links');
+    navToggle.addEventListener('click', () => {
+      const open = navList.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open);
+      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navList.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
+
+    // Active nav highlight (throttled with rAF)
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
+    let ticking = false;
 
-    window.addEventListener('scroll', () => {
+    function updateActive() {
       let current = '';
       sections.forEach(section => {
         if (window.scrollY >= section.offsetTop - 120) current = section.id;
       });
       navLinks.forEach(link => {
-        link.style.color = link.getAttribute('href') === '#' + current ? 'var(--highlight)' : '';
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
       });
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(updateActive); ticking = true; }
+    }, { passive: true });
+    updateActive();
+
+    // Contact form: validate, then open the visitor's email client
+    // (a static page can't send mail itself — swap in Formspree/EmailJS/Laravel endpoint if preferred)
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || '');
+
+      if (!data.name.trim() || !emailOk || !data.message.trim()) {
+        status.textContent = 'Please enter your name, a valid email and a message.';
+        status.classList.add('error');
+        return;
+      }
+      status.classList.remove('error');
+
+      const subject = data.subject.trim() || 'Project inquiry';
+      const body = `${data.message}\n\n— ${data.name} (${data.email})`;
+      window.location.href = `mailto:asadullahsudo@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      status.textContent = 'Opening your email app… thanks for reaching out!';
+      form.reset();
     });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
