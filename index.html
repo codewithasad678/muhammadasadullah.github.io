@@ -503,6 +503,8 @@
     .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--accent); }
     .form-textarea { resize: vertical; min-height: 130px; }
     .form-submit { width: 100%; }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .form-submit:disabled { opacity: 0.7; cursor: wait; transform: none; }
     .form-status { font-size: 0.85rem; margin-top: 0.9rem; min-height: 1.2em; color: var(--accent3); }
     .form-status.error { color: #ff7a7a; }
     .contact-info { display: flex; flex-direction: column; gap: 1rem; }
@@ -1120,6 +1122,7 @@
       </div>
       <div class="contact-wrapper">
         <form class="contact-form fade-up" id="contact-form" novalidate>
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" for="cf-name">Name</label>
@@ -1329,27 +1332,69 @@
       });
     }));
 
-    // Contact form: validate, then open the visitor's email client
-    // (a static page can't send mail itself — swap in Formspree/EmailJS/a Laravel endpoint if preferred)
+    // ── Contact form ──
+    // Sends through Web3Forms (free) — messages arrive in your inbox.
+    //  1) Get a free access key at https://web3forms.com (enter asadullahsudo@gmail.com, key is emailed to you)
+    //  2) Paste it below. Until then the form falls back to opening the visitor's email app.
+    const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE';
+    const CONTACT_EMAIL = 'asadullahsudo@gmail.com';
+
     const form = document.getElementById('contact-form');
     const status = document.getElementById('form-status');
-    form.addEventListener('submit', (e) => {
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const setStatus = (msg, isError) => { status.textContent = msg; status.classList.toggle('error', !!isError); };
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const data = Object.fromEntries(new FormData(form));
       const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || '');
 
       if (!data.name.trim() || !emailOk || !data.message.trim()) {
-        status.textContent = 'Please enter your name, a valid email and your project details.';
-        status.classList.add('error');
+        setStatus('Please enter your name, a valid email and your project details.', true);
         return;
       }
-      status.classList.remove('error');
+      if (data.botcheck) return; // spam bot filled the hidden field
 
       const subject = `${data.service} — inquiry from ${data.name}`;
-      const body = `${data.message}\n\nService: ${data.service}\nBudget: ${data.budget || 'Not specified'}\n\n— ${data.name} (${data.email})`;
-      window.location.href = `mailto:asadullahsudo@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      status.textContent = 'Opening your email app… thanks for reaching out!';
-      form.reset();
+
+      // No key yet: open the visitor's email app instead
+      if (!WEB3FORMS_KEY || WEB3FORMS_KEY.startsWith('YOUR_')) {
+        const body = `${data.message}\n\nService: ${data.service}\nBudget: ${data.budget || 'Not specified'}\n\n— ${data.name} (${data.email})`;
+        window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        setStatus('Opening your email app… thanks for reaching out!');
+        return;
+      }
+
+      const label = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      setStatus('');
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject,
+            from_name: 'Portfolio website',
+            name: data.name,
+            email: data.email,
+            service: data.service,
+            budget: data.budget || 'Not specified',
+            message: data.message,
+            botcheck: ''
+          })
+        });
+        const json = await res.json();
+        if (!res.ok || !json.success) throw new Error(json.message || 'Request failed');
+        setStatus("✓ Message sent! Thank you — I'll reply within 24 hours.");
+        form.reset();
+      } catch (err) {
+        setStatus(`Sorry, your message could not be sent. Please email ${CONTACT_EMAIL} or message me on WhatsApp.`, true);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = label;
+      }
     });
 
     document.getElementById('year').textContent = new Date().getFullYear();
